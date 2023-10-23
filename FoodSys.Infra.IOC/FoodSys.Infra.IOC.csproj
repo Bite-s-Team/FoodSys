@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.5.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.5.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\FoodSys.Application\FoodSys.Application.csproj" />
     <ProjectReference Include="..\FoodSys.Domain\FoodSys.Domain.csproj" />
     <ProjectReference Include="..\FoodSys.Infra.Data\FoodSys.Infra.Data.csproj" />

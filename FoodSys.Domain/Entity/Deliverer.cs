@@ -61,6 +61,7 @@ namespace FoodSys.Domain.Entity
 
         [Column("d_addressnumber")]
         [Required]
+        [MaxLength(8)]
         public virtual int AddressNumber { get; set; }
 
         [Column("d_complement")]

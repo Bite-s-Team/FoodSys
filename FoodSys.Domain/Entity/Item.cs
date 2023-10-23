@@ -31,7 +31,6 @@ namespace FoodSys.Domain.Entity
         [Column("oi_order_id")]
         [Required]
         public virtual Guid OrderId { get; set; }
-        [JsonIgnore]
         public virtual Order? Order { get; set; }
     }
 }

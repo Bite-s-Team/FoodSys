@@ -20,6 +20,7 @@ namespace FoodSys.Domain.Entity
         public virtual Guid Id { get; set; }
         [Required]
         [Column("p_name")]
+        [MaxLength(100)]
         public virtual String Name { get; set; }
     }
 }
