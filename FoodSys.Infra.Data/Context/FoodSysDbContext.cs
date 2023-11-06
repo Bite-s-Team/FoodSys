@@ -38,34 +38,34 @@ namespace FoodSys.Infra.Data.Context
         public static void Seed(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<DelivererStatus>().HasData(
-                new DelivererStatus { Name = "Offline" },
-                new DelivererStatus { Name = "Online" },
-                new DelivererStatus { Name = "Work" }
+                new DelivererStatus { Id = 1, Name = "Offline" },
+                new DelivererStatus { Id = 2, Name = "Online" },
+                new DelivererStatus { Id = 3, Name = "Work" }
                 );
             modelBuilder.Entity<DelivererVehicle>().HasData(
-                new DelivererVehicle { Name = "Bike" },
-                new DelivererVehicle { Name = "Motorcicle" }
+                new DelivererVehicle { Id = 1, Name = "Bike" },
+                new DelivererVehicle { Id = 2, Name = "Motorcicle" }
                 );
             modelBuilder.Entity<CompanyPlan>().HasData(
-                new CompanyPlan { Name = "Basic" },
-                new CompanyPlan { Name = "Master" }
+                new CompanyPlan { Id = 1, Name = "Basic" },
+                new CompanyPlan { Id = 2, Name = "Master" }
                 );
             modelBuilder.Entity<CompanyType>().HasData(
-                new CompanyType { Name = "Market" },
-                new CompanyType { Name = "Restaurant" }
+                new CompanyType { Id = 1, Name = "Market" },
+                new CompanyType { Id = 2, Name = "Restaurant" }
                 );
             modelBuilder.Entity<OrderStatus>().HasData(
-                new OrderStatus { Name = "Open" },
-                new OrderStatus { Name = "Closed" },
-                new OrderStatus { Name = "Canceled" }
+                new OrderStatus { Id = 1, Name = "Open" },
+                new OrderStatus { Id = 2, Name = "Closed" },
+                new OrderStatus { Id = 3, Name = "Canceled" }
                 );
             modelBuilder.Entity<CustomerPlan>().HasData(
-                new CustomerPlan { Name = "None" },
-                new CustomerPlan { Name = "Premium" }
+                new CustomerPlan { Id = 1, Name = "None" },
+                new CustomerPlan { Id = 2, Name = "Premium" }
                 );
             modelBuilder.Entity<CouponValueType>().HasData(
-                new CouponValueType { Name = "Percetage" },
-                new CouponValueType { Name = "Value" }
+                new CouponValueType { Id = 1, Name = "Percetage" },
+                new CouponValueType { Id = 2, Name = "Value" }
                 );
         }
     }

@@ -12,10 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\FoodSys.Infra.IOC\FoodSys.Infra.IOC.csproj" />
   </ItemGroup>
 

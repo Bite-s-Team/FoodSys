@@ -43,6 +43,5 @@ namespace FoodSys.Domain.Entity
         [Required]
         public virtual Guid DelivererId { get; set; }
         public virtual Deliverer Deliverer { get; set; } 
-        public virtual String? Error { get; set; }
     }
 }
