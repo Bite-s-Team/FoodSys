@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodSys.Infra.Data.Migrations
 {
     [DbContext(typeof(FoodSysDbContext))]
-    [Migration("20231023010344_init")]
+    [Migration("20231107063746_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -107,12 +107,12 @@ namespace FoodSys.Infra.Data.Migrations
                         .HasColumnType("nvarchar(60)")
                         .HasColumnName("cy_password");
 
-                    b.Property<Guid>("PlanId")
-                        .HasColumnType("uniqueidentifier")
+                    b.Property<int>("PlanId")
+                        .HasColumnType("int")
                         .HasColumnName("cy_plan_id");
 
-                    b.Property<Guid>("TypeId")
-                        .HasColumnType("uniqueidentifier")
+                    b.Property<int>("TypeId")
+                        .HasColumnType("int")
                         .HasColumnName("cy_type_id");
 
                     b.HasKey("Id");
@@ -126,10 +126,12 @@ namespace FoodSys.Infra.Data.Migrations
 
             modelBuilder.Entity("FoodSys.Domain.Entity.CompanyPlan", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("int")
                         .HasColumnName("cp_id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -144,22 +146,24 @@ namespace FoodSys.Infra.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("e38b9226-a769-4fc6-a2ed-b0b61c5abdfa"),
+                            Id = 1,
                             Name = "Basic"
                         },
                         new
                         {
-                            Id = new Guid("85639db2-623e-4575-8645-119fc965e2cf"),
+                            Id = 2,
                             Name = "Master"
                         });
                 });
 
             modelBuilder.Entity("FoodSys.Domain.Entity.CompanyType", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("int")
                         .HasColumnName("ctp_id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -174,12 +178,12 @@ namespace FoodSys.Infra.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("7e5af852-44f5-4818-b5f3-1f9e35f3f445"),
+                            Id = 1,
                             Name = "Market"
                         },
                         new
                         {
-                            Id = new Guid("efbc14c9-0f9f-4b78-86ba-43b5d841edd8"),
+                            Id = 2,
                             Name = "Restaurant"
                         });
                 });
@@ -197,8 +201,8 @@ namespace FoodSys.Infra.Data.Migrations
                         .HasColumnType("nvarchar(30)")
                         .HasColumnName("c_code");
 
-                    b.Property<Guid>("CompanyTypeId")
-                        .HasColumnType("uniqueidentifier")
+                    b.Property<int>("CompanyTypeId")
+                        .HasColumnType("int")
                         .HasColumnName("c_company_type_id");
 
                     b.Property<string>("Description")
@@ -218,22 +222,21 @@ namespace FoodSys.Infra.Data.Migrations
                         .HasColumnType("nvarchar(255)")
                         .HasColumnName("c_name");
 
-                    b.Property<Guid>("PlanId")
-                        .HasColumnType("uniqueidentifier")
+                    b.Property<int>("PlanId")
+                        .HasColumnType("int")
                         .HasColumnName("c_plan_id");
 
                     b.Property<decimal>("Value")
                         .HasColumnType("decimal(18,2)")
                         .HasColumnName("c_value");
 
-                    b.Property<Guid>("ValueTypeId")
-                        .HasColumnType("uniqueidentifier")
+                    b.Property<int>("ValueTypeId")
+                        .HasColumnType("int")
                         .HasColumnName("c_value_type_id");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CompanyTypeId")
-                        .IsUnique();
+                    b.HasIndex("CompanyTypeId");
 
                     b.HasIndex("MenuID");
 
@@ -296,10 +299,12 @@ namespace FoodSys.Infra.Data.Migrations
 
             modelBuilder.Entity("FoodSys.Domain.Entity.CouponValueType", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("int")
                         .HasColumnName("cvt_id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -314,12 +319,12 @@ namespace FoodSys.Infra.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("5b850a6c-0545-4280-8e4d-b9e5a946d5c4"),
+                            Id = 1,
                             Name = "Percetage"
                         },
                         new
                         {
-                            Id = new Guid("9b3e0b6d-0352-4779-8ce9-31f333fb5758"),
+                            Id = 2,
                             Name = "Value"
                         });
                 });
@@ -331,7 +336,11 @@ namespace FoodSys.Infra.Data.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("ct_id");
 
-                    b.Property<DateTime>("Birthday")
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit")
+                        .HasColumnName("ct_active");
+
+                    b.Property<DateTime?>("Birthday")
                         .HasColumnType("datetime2")
                         .HasColumnName("ct_birthday");
 
@@ -353,36 +362,40 @@ namespace FoodSys.Infra.Data.Migrations
                         .HasColumnType("nvarchar(255)")
                         .HasColumnName("ct_name");
 
-                    b.Property<string>("Password")
+                    b.Property<byte[]>("PasswordHash")
                         .IsRequired()
-                        .HasMaxLength(60)
-                        .HasColumnType("nvarchar(60)")
-                        .HasColumnName("ct_password");
+                        .HasColumnType("varbinary(max)")
+                        .HasColumnName("ct_password_hash");
+
+                    b.Property<byte[]>("PasswordSalt")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)")
+                        .HasColumnName("ct_password_salt");
 
                     b.Property<string>("PhoneNumber")
-                        .IsRequired()
                         .HasMaxLength(11)
                         .HasColumnType("nvarchar(11)")
                         .HasColumnName("ct_phonenumber");
 
-                    b.Property<Guid>("PlanId")
-                        .HasColumnType("uniqueidentifier")
+                    b.Property<int>("PlanId")
+                        .HasColumnType("int")
                         .HasColumnName("ct_plan_id");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PlanId")
-                        .IsUnique();
+                    b.HasIndex("PlanId");
 
                     b.ToTable("CUSTOMER");
                 });
 
             modelBuilder.Entity("FoodSys.Domain.Entity.CustomerPlan", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("int")
                         .HasColumnName("p_id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -397,12 +410,12 @@ namespace FoodSys.Infra.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("5370ac23-9ef6-420e-b6fc-c9d27304306d"),
+                            Id = 1,
                             Name = "None"
                         },
                         new
                         {
-                            Id = new Guid("6c68ab71-b8cd-4df5-bbf4-51bac0573974"),
+                            Id = 2,
                             Name = "Premium"
                         });
                 });
@@ -471,8 +484,8 @@ namespace FoodSys.Infra.Data.Migrations
                         .HasColumnType("nvarchar(11)")
                         .HasColumnName("d_phonenumber");
 
-                    b.Property<Guid>("StatusId")
-                        .HasColumnType("uniqueidentifier")
+                    b.Property<int>("StatusId")
+                        .HasColumnType("int")
                         .HasColumnName("d_status_id");
 
                     b.Property<string>("Street")
@@ -481,8 +494,8 @@ namespace FoodSys.Infra.Data.Migrations
                         .HasColumnType("nvarchar(255)")
                         .HasColumnName("d_street");
 
-                    b.Property<Guid>("VehicleId")
-                        .HasColumnType("uniqueidentifier")
+                    b.Property<int>("VehicleId")
+                        .HasColumnType("int")
                         .HasColumnName("d_vehicle_id");
 
                     b.HasKey("Id");
@@ -543,10 +556,12 @@ namespace FoodSys.Infra.Data.Migrations
 
             modelBuilder.Entity("FoodSys.Domain.Entity.DelivererStatus", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("int")
                         .HasColumnName("ds_id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -561,27 +576,29 @@ namespace FoodSys.Infra.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("c1ed9d5e-5b28-4766-9063-7dd75dfe9dc5"),
+                            Id = 1,
                             Name = "Offline"
                         },
                         new
                         {
-                            Id = new Guid("50fc596c-4760-4ba0-aa58-c55058fb93a3"),
+                            Id = 2,
                             Name = "Online"
                         },
                         new
                         {
-                            Id = new Guid("457c7de7-bb4a-490a-a3b9-2909bcb39b13"),
+                            Id = 3,
                             Name = "Work"
                         });
                 });
 
             modelBuilder.Entity("FoodSys.Domain.Entity.DelivererVehicle", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("int")
                         .HasColumnName("dv_id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -596,12 +613,12 @@ namespace FoodSys.Infra.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("52ddaa85-ef1b-49b8-892a-80f64aefcbf6"),
+                            Id = 1,
                             Name = "Bike"
                         },
                         new
                         {
-                            Id = new Guid("9a3e7663-0638-4a97-85c5-c39ea7417714"),
+                            Id = 2,
                             Name = "Motorcicle"
                         });
                 });
@@ -723,8 +740,8 @@ namespace FoodSys.Infra.Data.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("o_deliverer_id");
 
-                    b.Property<Guid>("StatusId")
-                        .HasColumnType("uniqueidentifier")
+                    b.Property<int>("StatusId")
+                        .HasColumnType("int")
                         .HasColumnName("o_status_id");
 
                     b.Property<decimal>("Value")
@@ -750,10 +767,12 @@ namespace FoodSys.Infra.Data.Migrations
 
             modelBuilder.Entity("FoodSys.Domain.Entity.OrderStatus", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("int")
                         .HasColumnName("os_id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -768,17 +787,17 @@ namespace FoodSys.Infra.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("62c55696-5457-4856-a491-c70298b0b12c"),
+                            Id = 1,
                             Name = "Open"
                         },
                         new
                         {
-                            Id = new Guid("5b3b9e5c-1a67-42f9-ac3f-726d970ec605"),
+                            Id = 2,
                             Name = "Closed"
                         },
                         new
                         {
-                            Id = new Guid("088abd95-e418-41a3-bb7a-4d7833d59bdd"),
+                            Id = 3,
                             Name = "Canceled"
                         });
                 });
@@ -816,8 +835,8 @@ namespace FoodSys.Infra.Data.Migrations
             modelBuilder.Entity("FoodSys.Domain.Entity.Coupon", b =>
                 {
                     b.HasOne("FoodSys.Domain.Entity.CompanyType", "CompanyType")
-                        .WithOne()
-                        .HasForeignKey("FoodSys.Domain.Entity.Coupon", "CompanyTypeId")
+                        .WithMany()
+                        .HasForeignKey("CompanyTypeId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
@@ -889,8 +908,8 @@ namespace FoodSys.Infra.Data.Migrations
             modelBuilder.Entity("FoodSys.Domain.Entity.Customer", b =>
                 {
                     b.HasOne("FoodSys.Domain.Entity.CustomerPlan", "Plan")
-                        .WithOne()
-                        .HasForeignKey("FoodSys.Domain.Entity.Customer", "PlanId")
+                        .WithMany()
+                        .HasForeignKey("PlanId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 

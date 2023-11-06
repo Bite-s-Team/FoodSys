@@ -41,13 +41,12 @@ namespace FoodSys.Domain.Entity
 
         [Column("cy_type_id")]
         [Required]
-        public virtual Guid TypeId { get; set; }
+        public virtual int TypeId { get; set; }
         public virtual CompanyType Type { get; set; }
 
         [Column("cy_plan_id")]
         [Required]
-        public virtual Guid PlanId { get; set; }
+        public virtual int PlanId { get; set; }
         public virtual CompanyPlan Plan { get; set; }
-        public virtual String? Error { get; set; }
     }
 }

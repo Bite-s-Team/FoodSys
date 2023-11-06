@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FoodSys.Domain.Entity
@@ -25,29 +26,33 @@ namespace FoodSys.Domain.Entity
         [MaxLength(255)]
         public virtual String Email { get; set; }
 
-        [Column("ct_password")]
+        [Column("ct_password_hash")]
         [Required]
-        [MaxLength(60)]
-        public virtual String Password { get; set; }
+        public virtual byte[] PasswordHash { get; set; }
+
+        [Column("ct_password_salt")]
+        [Required]
+        public virtual byte[] PasswordSalt { get; set; }
 
         [Column("ct_phonenumber")]
-        [Required]
         [MaxLength(11)]
-        public virtual String PhoneNumber { get; set; }
+        public virtual String? PhoneNumber { get; set; }
 
         [Column("ct_birthday")]
-        [Required]
-        public virtual DateTime Birthday { get; set; }
+        public virtual DateTime? Birthday { get; set; }
 
         [Column("ct_cpf")]
-        [Required]
         [MaxLength(11)]
         public virtual String CPF { get; set; }
 
         [Column("ct_plan_id")]
-        [Required]
-        public virtual Guid PlanId { get; set; }
+        [DefaultValue(1)]
+        public virtual int PlanId { get; set; }
         public virtual CustomerPlan Plan { get; set; }
-        public virtual String? Error { get; set; }
+
+        [Column("ct_active")]
+        [DefaultValue(1)]
+        [Required]
+        public virtual bool Active { get; set; }
     }
 }

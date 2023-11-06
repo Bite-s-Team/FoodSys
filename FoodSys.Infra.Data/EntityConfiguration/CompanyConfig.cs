@@ -10,7 +10,6 @@ namespace FoodAPI.Data.Map
         {
             builder.HasOne(x => x.Type).WithMany();
             builder.HasOne(x => x.Plan).WithMany();
-            builder.Ignore(x => x.Error);
         }
         
     }

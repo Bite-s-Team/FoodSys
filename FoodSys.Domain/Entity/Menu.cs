@@ -50,7 +50,5 @@ namespace FoodSys.Domain.Entity
         [Required]
         public virtual Guid CompanyId { get; set; }
         public virtual Company Company { get; set; }
-
-        public virtual String? Error { get; set; }
     }
 }

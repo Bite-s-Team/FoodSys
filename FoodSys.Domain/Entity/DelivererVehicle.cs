@@ -6,13 +6,9 @@ namespace FoodSys.Domain.Entity
     [Table("DELIVERER_VEHICLE")]
     public class DelivererVehicle
     {
-        public DelivererVehicle() 
-        { 
-            Id = Guid.NewGuid();
-        }
         [Key]
         [Column("dv_id")]
-        public virtual Guid Id { get; set; }
+        public virtual int Id { get; set; }
         [Column("dv_name")]
         [Required]
         [MaxLength(100)]

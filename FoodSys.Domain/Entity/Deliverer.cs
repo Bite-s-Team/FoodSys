@@ -71,14 +71,12 @@ namespace FoodSys.Domain.Entity
 
         [Column("d_status_id")]
         [Required]
-        public virtual Guid StatusId { get; set; }
+        public virtual int StatusId { get; set; }
         public virtual DelivererStatus Status { get; set; }
 
         [Column("d_vehicle_id")]
         [Required]
-        public virtual Guid VehicleId { get; set; }
+        public virtual int VehicleId { get; set; }
         public virtual DelivererVehicle Vehicle { get; set; }
-        public virtual String? Error { get; set; }
-
     }
 }

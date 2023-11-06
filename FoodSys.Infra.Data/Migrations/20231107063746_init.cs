@@ -17,7 +17,8 @@ namespace FoodSys.Infra.Data.Migrations
                 name: "COMPANY_PLAN",
                 columns: table => new
                 {
-                    cp_id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    cp_id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     cp_name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
@@ -29,7 +30,8 @@ namespace FoodSys.Infra.Data.Migrations
                 name: "COMPANY_TYPE",
                 columns: table => new
                 {
-                    ctp_id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ctp_id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     ctp_name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
@@ -41,7 +43,8 @@ namespace FoodSys.Infra.Data.Migrations
                 name: "COUPON_VALUE_TYPE",
                 columns: table => new
                 {
-                    cvt_id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    cvt_id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     cvt_name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
@@ -53,7 +56,8 @@ namespace FoodSys.Infra.Data.Migrations
                 name: "CUSTOMER_PLAN",
                 columns: table => new
                 {
-                    p_id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    p_id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     p_name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
@@ -65,7 +69,8 @@ namespace FoodSys.Infra.Data.Migrations
                 name: "DELIVERER_STATUS",
                 columns: table => new
                 {
-                    ds_id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ds_id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     ds_name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
@@ -77,7 +82,8 @@ namespace FoodSys.Infra.Data.Migrations
                 name: "DELIVERER_VEHICLE",
                 columns: table => new
                 {
-                    dv_id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    dv_id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     dv_name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
@@ -89,7 +95,8 @@ namespace FoodSys.Infra.Data.Migrations
                 name: "ORDER_STATUS",
                 columns: table => new
                 {
-                    os_id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    os_id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     os_name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
@@ -107,8 +114,8 @@ namespace FoodSys.Infra.Data.Migrations
                     cy_email = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     cy_password = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
                     cy_cnpj = table.Column<string>(type: "nvarchar(14)", maxLength: 14, nullable: false),
-                    cy_type_id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    cy_plan_id = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    cy_type_id = table.Column<int>(type: "int", nullable: false),
+                    cy_plan_id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -134,11 +141,13 @@ namespace FoodSys.Infra.Data.Migrations
                     ct_id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ct_name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     ct_email = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    ct_password = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
-                    ct_phonenumber = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
-                    ct_birthday = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ct_password_hash = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    ct_password_salt = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    ct_phonenumber = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: true),
+                    ct_birthday = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ct_cpf = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
-                    ct_plan_id = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    ct_plan_id = table.Column<int>(type: "int", nullable: false),
+                    ct_active = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -166,8 +175,8 @@ namespace FoodSys.Infra.Data.Migrations
                     d_street = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     d_addressnumber = table.Column<int>(type: "int", maxLength: 8, nullable: false),
                     d_complement = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    d_status_id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    d_vehicle_id = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    d_status_id = table.Column<int>(type: "int", nullable: false),
+                    d_vehicle_id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -265,9 +274,9 @@ namespace FoodSys.Infra.Data.Migrations
                     c_description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
                     c_menu_id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     c_value = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    c_value_type_id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    c_company_type_id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    c_plan_id = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    c_value_type_id = table.Column<int>(type: "int", nullable: false),
+                    c_company_type_id = table.Column<int>(type: "int", nullable: false),
+                    c_plan_id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -355,7 +364,7 @@ namespace FoodSys.Infra.Data.Migrations
                     o_address_id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     o_value = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     o_date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    o_status_id = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    o_status_id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -428,8 +437,8 @@ namespace FoodSys.Infra.Data.Migrations
                 columns: new[] { "cp_id", "cp_name" },
                 values: new object[,]
                 {
-                    { new Guid("85639db2-623e-4575-8645-119fc965e2cf"), "Master" },
-                    { new Guid("e38b9226-a769-4fc6-a2ed-b0b61c5abdfa"), "Basic" }
+                    { 1, "Basic" },
+                    { 2, "Master" }
                 });
 
             migrationBuilder.InsertData(
@@ -437,8 +446,8 @@ namespace FoodSys.Infra.Data.Migrations
                 columns: new[] { "ctp_id", "ctp_name" },
                 values: new object[,]
                 {
-                    { new Guid("7e5af852-44f5-4818-b5f3-1f9e35f3f445"), "Market" },
-                    { new Guid("efbc14c9-0f9f-4b78-86ba-43b5d841edd8"), "Restaurant" }
+                    { 1, "Market" },
+                    { 2, "Restaurant" }
                 });
 
             migrationBuilder.InsertData(
@@ -446,8 +455,8 @@ namespace FoodSys.Infra.Data.Migrations
                 columns: new[] { "cvt_id", "cvt_name" },
                 values: new object[,]
                 {
-                    { new Guid("5b850a6c-0545-4280-8e4d-b9e5a946d5c4"), "Percetage" },
-                    { new Guid("9b3e0b6d-0352-4779-8ce9-31f333fb5758"), "Value" }
+                    { 1, "Percetage" },
+                    { 2, "Value" }
                 });
 
             migrationBuilder.InsertData(
@@ -455,8 +464,8 @@ namespace FoodSys.Infra.Data.Migrations
                 columns: new[] { "p_id", "p_name" },
                 values: new object[,]
                 {
-                    { new Guid("5370ac23-9ef6-420e-b6fc-c9d27304306d"), "None" },
-                    { new Guid("6c68ab71-b8cd-4df5-bbf4-51bac0573974"), "Premium" }
+                    { 1, "None" },
+                    { 2, "Premium" }
                 });
 
             migrationBuilder.InsertData(
@@ -464,9 +473,9 @@ namespace FoodSys.Infra.Data.Migrations
                 columns: new[] { "ds_id", "ds_name" },
                 values: new object[,]
                 {
-                    { new Guid("457c7de7-bb4a-490a-a3b9-2909bcb39b13"), "Work" },
-                    { new Guid("50fc596c-4760-4ba0-aa58-c55058fb93a3"), "Online" },
-                    { new Guid("c1ed9d5e-5b28-4766-9063-7dd75dfe9dc5"), "Offline" }
+                    { 1, "Offline" },
+                    { 2, "Online" },
+                    { 3, "Work" }
                 });
 
             migrationBuilder.InsertData(
@@ -474,8 +483,8 @@ namespace FoodSys.Infra.Data.Migrations
                 columns: new[] { "dv_id", "dv_name" },
                 values: new object[,]
                 {
-                    { new Guid("52ddaa85-ef1b-49b8-892a-80f64aefcbf6"), "Bike" },
-                    { new Guid("9a3e7663-0638-4a97-85c5-c39ea7417714"), "Motorcicle" }
+                    { 1, "Bike" },
+                    { 2, "Motorcicle" }
                 });
 
             migrationBuilder.InsertData(
@@ -483,9 +492,9 @@ namespace FoodSys.Infra.Data.Migrations
                 columns: new[] { "os_id", "os_name" },
                 values: new object[,]
                 {
-                    { new Guid("088abd95-e418-41a3-bb7a-4d7833d59bdd"), "Canceled" },
-                    { new Guid("5b3b9e5c-1a67-42f9-ac3f-726d970ec605"), "Closed" },
-                    { new Guid("62c55696-5457-4856-a491-c70298b0b12c"), "Open" }
+                    { 1, "Open" },
+                    { 2, "Closed" },
+                    { 3, "Canceled" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -506,8 +515,7 @@ namespace FoodSys.Infra.Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_COUPON_c_company_type_id",
                 table: "COUPON",
-                column: "c_company_type_id",
-                unique: true);
+                column: "c_company_type_id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_COUPON_c_menu_id",
@@ -549,8 +557,7 @@ namespace FoodSys.Infra.Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_CUSTOMER_ct_plan_id",
                 table: "CUSTOMER",
-                column: "ct_plan_id",
-                unique: true);
+                column: "ct_plan_id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DELIVERER_d_status_id",

@@ -51,8 +51,7 @@ namespace FoodSys.Domain.Entity
 
         [Column("o_status_id")]
         [Required]
-        public virtual Guid StatusId { get; set; }
+        public virtual int StatusId { get; set; }
         public virtual OrderStatus Status { get; set; }
-        public virtual String? Error { get; set; }
     }
 }

@@ -41,21 +41,20 @@ namespace FoodSys.Domain.Entity
 
         [Column("c_value_type_id")]
         [Required]
-        public virtual Guid ValueTypeId { get; set; }
+        public virtual int ValueTypeId { get; set; }
         public virtual CouponValueType ValueType { get; set; }
 
         [Column("c_company_type_id")]
         [Required]
-        public virtual Guid CompanyTypeId { get; set; }
+        public virtual int CompanyTypeId { get; set; }
         public virtual CompanyType CompanyType { get; set; }
 
         [Column("c_plan_id")]
         [Required]
-        public virtual Guid PlanId { get; set; }
+        public virtual int PlanId { get; set; }
         public virtual CustomerPlan Plan { get; set; }
 
         public virtual List<CouponCustomerRel>? CustomerRel { get; set; }
         public virtual List<CouponCompanyRel> CompanyRel { get; set; }
-        public virtual String? Error { get; set; }
     }
 }

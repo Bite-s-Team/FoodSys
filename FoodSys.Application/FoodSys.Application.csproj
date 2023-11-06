@@ -8,12 +8,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FoodSys.Domain\FoodSys.Domain.csproj" />
+    <ProjectReference Include="..\FoodSys.Infra.Data\FoodSys.Infra.Data.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DTO\" />
-    <Folder Include="Map\" />
-    <Folder Include="Service\Interface\" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
   </ItemGroup>
 
 </Project>
