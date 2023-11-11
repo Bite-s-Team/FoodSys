@@ -6,13 +6,9 @@ namespace FoodSys.Domain.Entity
     [Table("COUPON_VALUE_TYPE")]
     public class CouponValueType
     {
-        public CouponValueType()
-        {
-            Id = Guid.NewGuid();
-        }
         [Column("cvt_id")]
         [Key]
-        public virtual Guid Id { get; set; }
+        public virtual int Id { get; set; }
         [Column("cvt_name")]
         [Required]
         [MaxLength(100)]

@@ -9,8 +9,6 @@ namespace FoodAPI.Data.Map
         public void Configure(EntityTypeBuilder<Menu> builder)
         {
             builder.HasOne(x => x.Company).WithMany().OnDelete(DeleteBehavior.NoAction);
-
-            builder.Ignore(x => x.Error);
         }
     }
 }

@@ -6,13 +6,9 @@ namespace FoodSys.Domain.Entity
     [Table("ORDER_STATUS")]
     public class OrderStatus
     {
-        public OrderStatus() 
-        { 
-            Id = Guid.NewGuid();
-        }
         [Key]
         [Column("os_id")]
-        public virtual Guid Id { get; set; }
+        public virtual int Id { get; set; }
         [Required]
         [Column("os_name")]
         [MaxLength(100)]

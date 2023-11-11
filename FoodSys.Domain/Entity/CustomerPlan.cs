@@ -11,13 +11,9 @@ namespace FoodSys.Domain.Entity
     [Table("CUSTOMER_PLAN")]
     public class CustomerPlan
     {
-        public CustomerPlan()
-        {
-            Id = Guid.NewGuid();
-        }
         [Key]
         [Column("p_id")]
-        public virtual Guid Id { get; set; }
+        public virtual int Id { get; set; }
         [Required]
         [Column("p_name")]
         [MaxLength(100)]

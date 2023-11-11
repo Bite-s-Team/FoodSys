@@ -4,12 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FoodAPI.Data.Map
 {
-    public class UserConfig : IEntityTypeConfiguration<Customer>
+    public class CustomerConfig : IEntityTypeConfiguration<Customer>
     {
         public void Configure(EntityTypeBuilder<Customer> builder)
         { 
-            builder.HasOne(x => x.Plan).WithOne().OnDelete(DeleteBehavior.NoAction);
-            builder.Ignore(x => x.Error);
+            builder.HasOne(x => x.Plan).WithMany().OnDelete(DeleteBehavior.NoAction);
         }
         
     }
